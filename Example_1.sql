@@ -65,9 +65,7 @@ CREATE TABLE autor_livro (
 );
 
 -- Inserir dados nas tabelas
-INSERT INTO
-    livro (titulo, isbn, descricao)
-VALUES
+INSERT INTO livro (titulo, isbn, descricao) VALUES
     (
         'Sapiens: Uma Breve História da Humanidade',
         '9788535925697',
@@ -119,9 +117,7 @@ VALUES
         'Robert Kiyosaki compara os ensinamentos financeiros de seu “pai rico” e “pai pobre”, mostrando como construir ativos, investir e alcançar independência financeira.'
     );
 
-INSERT INTO
-    autor (nome, data_nasc, biografia)
-VALUES
+INSERT INTO autor (nome, data_nasc, biografia) VALUES
     (
         'Yuval Noah Harari',
         '1976-02-24',
@@ -173,9 +169,7 @@ VALUES
         'Escritor norte-americano, mestre do terror, suspense e fantasia, autor de mais de 60 romances best-sellers.'
     );
 
-INSERT INTO
-    usuario (numero_ident, email, data_cadastro)
-VALUES
+INSERT INTO usuario (numero_ident, email, data_cadastro) VALUES
     (
         'U1001',
         'ana.silva@email.com',
@@ -227,9 +221,7 @@ VALUES
         '2025-10-23'
     );
 
-INSERT INTO
-    nivel_usuario (nivel, id_usuario)
-VALUES
+INSERT INTO nivel_usuario (nivel, id_usuario) VALUES
     ('Administrador', 1),
     ('Padrão', 2),
     ('Administrador', 3),
@@ -241,9 +233,7 @@ VALUES
     ('Padrão', 9),
     ('Padrão', 10);
 
-INSERT INTO
-    categoria (nome)
-VALUES
+INSERT INTO categoria (nome) VALUES
     ('Ficção'),
     ('Romance'),
     ('Terror'),
@@ -255,15 +245,7 @@ VALUES
     ('Infantil'),
     ('Aventura');
 
-INSERT INTO
-    emprestimo (
-        data_emprestimo,
-        data_devolucao,
-        data_devolucaoRealizada,
-        id_livro,
-        id_usuario
-    )
-VALUES
+INSERT INTO emprestimo (data_emprestimo, data_devolucao, data_devolucaoRealizada, id_livro, id_usuario) VALUES
     (
         '2024-01-15',
         '2024-01-29',
@@ -335,9 +317,7 @@ VALUES
         10
     );
 
-INSERT INTO
-    livro_categoria (id_livro, id_categoria)
-VALUES
+INSERT INTO livro_categoria (id_livro, id_categoria) VALUES
     (1, 8),
     (2, 9),
     (3, 10),
@@ -349,9 +329,7 @@ VALUES
     (9, 4),
     (10, 5);
 
-INSERT INTO
-    autor_livro (id_livro, id_autor)
-VALUES
+INSERT INTO autor_livro (id_livro, id_autor) VALUES
     (1, 1),
     (2, 1),
     (3, 1),
@@ -364,45 +342,21 @@ VALUES
     (10, 8);
 
 -- Visualizar os dados que estão dentro de cada tabela
-SELECT
-    *
-FROM
-    livro;
+SELECT * FROM livro;
 
-SELECT
-    *
-FROM
-    autor;
+SELECT * FROM autor;
 
-SELECT
-    *
-FROM
-    usuario;
+SELECT * FROM usuario;
 
-SELECT
-    *
-FROM
-    nivel_usuario;
+SELECT * FROM nivel_usuario;
 
-SELECT
-    *
-FROM
-    categoria;
+SELECT * FROM categoria;
 
-SELECT
-    *
-FROM
-    emprestimo;
+SELECT * FROM emprestimo;
 
-SELECT
-    *
-FROM
-    livro_categoria;
+SELECT * FROM livro_categoria;
 
-SELECT
-    *
-FROM
-    autor_livro;
+SELECT * FROM autor_livro;
 
 -- Para visualizar as tabelas
 SHOW tables;
