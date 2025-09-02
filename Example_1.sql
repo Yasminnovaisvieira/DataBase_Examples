@@ -8,7 +8,7 @@ USE biblioteca_yasmin;
 CREATE TABLE livro (
     id INT PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(255),
-    isbn VARCHAR(255),
+    isbn VARCHAR(255) UNIQUE,
     descricao TEXT
 );
 
@@ -22,7 +22,7 @@ CREATE TABLE autor (
 CREATE TABLE usuario (
     id INT PRIMARY KEY AUTO_INCREMENT,
     numero_ident VARCHAR(255),
-    email VARCHAR(255),
+    email VARCHAR(255) UNIQUE,
     data_cadastro DATE
 );
 
@@ -249,7 +249,7 @@ INSERT INTO emprestimo (data_emprestimo, data_devolucao, data_devolucaoRealizada
     (
         '2024-01-15',
         '2024-01-29',
-        '2024-01-28',
+        '',
         1,
         2
     ),
@@ -284,7 +284,7 @@ INSERT INTO emprestimo (data_emprestimo, data_devolucao, data_devolucaoRealizada
     (
         '2024-11-05',
         '2024-11-19',
-        '2024-11-20',
+        '',
         7,
         4
     ),
@@ -312,7 +312,7 @@ INSERT INTO emprestimo (data_emprestimo, data_devolucao, data_devolucaoRealizada
     (
         '2025-07-21',
         '2025-08-04',
-        '2025-08-03',
+        '',
         10,
         10
     );
