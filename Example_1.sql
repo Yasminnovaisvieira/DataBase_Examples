@@ -240,7 +240,7 @@ INSERT INTO categoria (nome) VALUES
     ('Suspense'),
     ('Fantasia'),
     ('Biografia'),
-    ('Educação Financera'),
+    ('Educação Financeira'),
     ('Drama'),
     ('Infantil'),
     ('Aventura');
