@@ -7,27 +7,27 @@ USE cursos_yasmin;
 -- Criar tabelas
 CREATE TABLE modulo_curso (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    titulo VARCHAR(255),
-    ordem INT,
-    carga_horaria INT 
+    titulo VARCHAR(255) NOT NULL,
+    ordem INT NOT NULL,
+    carga_horaria INT NOT NULL
 );
 
 CREATE TABLE professor (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(255),
-    data_nascimento DATE
+    nome VARCHAR(255) NOT NULL,
+    data_nascimento DATE NOT NULL
 );
 
 CREATE TABLE curso (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    materia VARCHAR(255),
+    materia VARCHAR(255) NOT NULL,
     id_modulo INT,
     FOREIGN KEY (id_modulo) REFERENCES modulo(id)
 );
 
 CREATE TABLE professor_curso (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    papel_professor ENUM ('Titular', 'Tutor'),
+    papel_professor ENUM ('Titular', 'Tutor') NOT NULL,
     id_curso INT,
     id_professor INT,
     FOREIGN KEY (id_curso) REFERENCES curso(id),
@@ -36,21 +36,21 @@ CREATE TABLE professor_curso (
 
 CREATE TABLE plano_vigente (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    beneficio TEXT
+    beneficio TEXT NOT NULL
 );
 
 CREATE TABLE aluno (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(255),
-    data_nascimento DATE,
+    nome VARCHAR(255) NOT NULL,
+    data_nascimento DATE NOT NULL,
     id_plano INT,
     FOREIGN KEY (id_plano) REFERENCES plano_vigente(id)
 );
 
 CREATE TABLE inscricao (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    data DATE,
-    situacao ENUM('Ativa', 'Concluida', 'Trancada'),
+    data DATE NOT NULL,
+    situacao ENUM('Ativa', 'Concluida', 'Trancada') NOT NULL,
     id_aluno INT,
     id_curso INT,
     FOREIGN KEY (id_aluno) REFERENCES aluno(id),
@@ -59,9 +59,9 @@ CREATE TABLE inscricao (
 
 CREATE TABLE perfil_opcional (
 	id INT PRIMARY KEY AUTO_INCREMENT,
-    foto BLOB,
-    biografia TEXT,
-    data_nascimento DATE,
+    foto BLOB NULL,
+    biografia TEXT NULL,
+    data_nascimento DATE NULL,
     id_aluno INT,
     FOREIGN KEY (id_aluno) REFERENCES aluno(id)
 );
