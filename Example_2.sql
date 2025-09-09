@@ -22,7 +22,7 @@ CREATE TABLE curso (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     materia VARCHAR(255) NOT NULL,
     id_modulo INT,
-    FOREIGN KEY (id_modulo) REFERENCES modulo(id)
+    FOREIGN KEY (id_modulo) REFERENCES modulo_curso(id)
 );
 
 CREATE TABLE professor_curso (
