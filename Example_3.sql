@@ -39,6 +39,7 @@ CREATE TABLE manutencao (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     quantidade_pecas INT NOT NULL,
     tipo_manutencao ENUM ('Preventiva', 'Corretiva') NOT NULL,
+    data_proxima DATE NULL,
     id_peca INT,
     id_equipamento INT,
     id_laudo INT,
@@ -89,10 +90,10 @@ INSERT INTO laudo_tecnico (observacao, data, resultado) VALUES
     ('Equipamento estava com problemas nas teclas', '2023-07-06', 'Não foi possível realizar a manutenção'),
     ('Equipamento estava com problemas ao desligar, pois continuava pingando água', '2005-07-09', 'Deu tudo certo');
     
-INSERT INTO manutencao (quantidade_pecas, tipo_manutencao, id_peca, id_equipamento, id_laudo) VALUES
-	(5, 'Preventiva', 3, 3, 1),
-    (9, 'Corretiva', 2, 2, 3),
-    (7, 'Preventiva', 1, 1, 2);
+INSERT INTO manutencao (quantidade_pecas, tipo_manutencao, data_proxima, id_peca, id_equipamento, id_laudo) VALUES
+	(5, 'Preventiva', '2025-05-23', 3, 3, 1),
+    (9, 'Corretiva', '2025-03-09', 2, 2, 3),
+    (7, 'Preventiva', '2025-02-12', 1, 1, 2);
     
 INSERT INTO tecnico_manutencao (status, id_tecnico, id_manutencao) VALUES
 	('Em Andamento', 2, 1),
