@@ -1,3 +1,4 @@
+-- Usar o banco de dados
 USE biblioteca_yasmin;
 
 -- Select onde ID é 3
@@ -5,99 +6,94 @@ SELECT titulo, descricao FROM livro WHERE id = 3;
 
 -- Inserção de novo gênero dentro de Categoria
 INSERT INTO categoria (nome) VALUES ('Técnico');
-SELECT * FROM categoria;
 
 -- Alter table da tabela Livro
 ALTER TABLE livro 
-ADD COLUMN edicao VARCHAR(150),
+ADD COLUMN edicao VARCHAR(50),
 ADD COLUMN data_publicacao DATE,
-ADD COLUMN quantidade_paginas INT;
-
-SELECT * FROM livro;
+ADD COLUMN status VARCHAR(20) NOT NULL DEFAULT 'disponivel';
 
 -- Insert na tabela Autor
 INSERT INTO autor (nome, data_nasc, biografia)
 VALUES (
-    'Eric Matthes',
-    '1913-07-25',
-    'O senador Eric Randall Matthews, também um grande autor de livros de desenvolvimento'
+    'Eric Matthes', 
+    '1975-01-01', 
+    'Autor de livros de programação Python.'
 );
-SELECT * FROM autor;
 
 -- Insert na tabela Livro
-INSERT INTO livro (titulo, descricao, quantidade_paginas, isbn, edicao, data_publicacao)
+INSERT INTO livro (titulo, isbn, descricao, edicao, data_publicacao)
 VALUES(
     'Python',
+    '1718502702', -- ISBN conforme a tarefa
     'Livro sobre programação em Python do iniciante até o avançado',
-    89,
-    '652419890',
-    '3° Edição',
+    '3ª edição',
     '2023-04-24'
 );
-SELECT * FROM livro;
 
--- Insert na tabela livro_categoria
-INSERT INTO livro_categoria (id_livro, id_categoria) 
-VALUES (11, 11);
-SELECT * FROM livro_categoria;
+-- Insert na tabela livro_categoria (e autor_livro) para relacionar o livro novo
+INSERT INTO livro_categoria (id_livro, id_categoria) VALUES (11, 11);
+INSERT INTO autor_livro (id_livro, id_autor) VALUES (11, 11);
 
--- Atualização do e-mail do usuario
+-- Atualização do e-mail do usuário
 UPDATE usuario SET email = 'teste@email.com' WHERE id = 1;
-SELECT * FROM usuario;
 
 -- Correção do título do livro Python
 UPDATE livro SET titulo = 'Curso Intensivo de Python: uma Introdução Prática e Baseada em Projetos à Programação' WHERE id = 11;
-SELECT * FROM livro;
 
--- Adicionar coluna status em Livro
-ALTER TABLE livro ADD COLUMN status ENUM('Ativo', 'Inativo') NOT NULL DEFAULT 'Ativo';
-SELECT * FROM livro;
-
--- Insert na tabela Livro (livro antigo, vai virar Inativo depois)
-INSERT INTO livro (titulo, descricao, quantidade_paginas, isbn, edicao, data_publicacao)
+-- Insert na tabela Livro
+INSERT INTO livro (titulo, isbn, edicao, data_publicacao)
 VALUES(
     'JavaScript: The Definitive Guide',
-    'Guia abrangente e referência técnica sobre a linguagem JavaScript: cobre a “core language” (tipos, operadores, estruturas de controle, funções), a programação orientada a objetos em JS, bem como a API do navegador (Document Object Model, manipulação de imagens, cookies, eventos) da época.',
-    776,
     '9781565923928',
     '3° Edição',
     '1998-06-11'
 );
 
 -- Marcar livros publicados antes dos anos 2000 como Inativos
-UPDATE livro
-SET status = 'Inativo'
-WHERE data_publicacao < '2000-01-01';
-SELECT * FROM livro;
+UPDATE livro SET status = 'inativo' WHERE YEAR(data_publicacao) < 2000;
 
--- Deletar livro de todas as tabelas que o utilizam (exemplo com id=2)
+
+-- Deletar livro de todas as tabelas que o utilizam
 DELETE FROM autor_livro WHERE id_livro = 2;
 DELETE FROM livro_categoria WHERE id_livro = 2;
 DELETE FROM emprestimo WHERE id_livro = 2;
 DELETE FROM livro WHERE id = 2;
 
--- Insert de um usuário teste
-INSERT INTO usuario (numero_ident, email, data_cadastro)
+-- Adição da coluna "nome" no usuário
+ALTER TABLE usuario ADD COLUMN nome VARCHAR(255);
+
+-- Insert de um usuário
+INSERT INTO usuario (nome, numero_ident, email, data_cadastro)
 VALUES (
+    'Teste Testador', 
     'UTESTE', 
     'testetestador@gmail.com', 
     '2023-09-23'
 );
-SELECT * FROM usuario;
 
--- Delete do usuário teste
-DELETE FROM usuario WHERE numero_ident = 'UTESTE';
+-- Delete do usuário pelo nome, conforme a tarefa
+DELETE FROM usuario WHERE nome = 'Teste Testador';
 
--- Insert de empréstimo (ajustado para colunas corretas)
-INSERT INTO emprestimo (id_usuario, id_livro, data_emprestimo, data_devolucao, data_devolucaoRealizada) 
+-- Insert de um livro com o status "danificado"
+INSERT INTO livro (titulo, isbn, status)
+VALUES (
+    'Livro Danificado de Teste', 
+    '0000000001', 
+    'danificado'
+);
+
+-- Deletar livros com status = "danificado"
+DELETE FROM livro WHERE status = 'danificado';
+
+-- Insert de empréstimo para garantir que existe um registro de 2020
+INSERT INTO emprestimo (id_usuario, id_livro, data_emprestimo, data_devolucao) 
 VALUES (
     3, 
     9, 
     '2020-08-15', 
-    '2020-08-29', 
-    '2020-08-16'
+    '2020-08-29'
 );
-SELECT * FROM emprestimo;
 
 -- Delete de empréstimo realizado no ano 2020
 DELETE FROM emprestimo WHERE YEAR(data_emprestimo) = 2020;
