@@ -9,6 +9,7 @@ CREATE TABLE livro (
     id INT PRIMARY KEY AUTO_INCREMENT,
     titulo VARCHAR(255),
     isbn VARCHAR(255) UNIQUE,
+    quantidade_paginas INT,
     descricao TEXT
 );
 
@@ -21,7 +22,7 @@ CREATE TABLE autor (
 
 CREATE TABLE usuario (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    numero_ident VARCHAR(255),
+    nome varchar(150),
     email VARCHAR(255) UNIQUE,
     data_cadastro DATE
 );
